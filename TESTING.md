@@ -12,6 +12,10 @@ Validated in Civilization VI 1.0.12.68, DX12, Simplified Chinese, with Detailed 
 
 The running session was patched through the game's enabled debugging interface for these checks. A fresh load from the installed files is a separate regression check; do not infer it from a successful hot-load.
 
+## v0.1.3 capital correction
+
+The live game reported Canberra at `(115, 13)`: plains, river, fresh water, coastal land, appeal 6. The capital triangle is therefore city `(115, 13)`, harbor `(115, 12)`, and commercial hub `(114, 13)`. The commercial-hub plot is riverside and adjacent to both the city center and harbor. This replaces the original coastal-only city plot at `(116, 14)`.
+
 ## Manual release checklist
 
 1. Install using install.ps1, then load a game with the mod enabled.

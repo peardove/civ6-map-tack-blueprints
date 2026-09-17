@@ -12,7 +12,7 @@ MTB_TSL_HUGE_AUSTRALIA = {
     -- Terrain-only anchors are stable even when resources, ley lines, huts,
     -- and other dynamic layers differ between games.
     anchors = {
-      { x = 116, y = 14, terrain = "TERRAIN_PLAINS" },
+      { x = 115, y = 13, terrain = "TERRAIN_PLAINS" },
       { x = 117, y = 14, terrain = "TERRAIN_COAST" },
       { x = 112, y = 15, terrain = "TERRAIN_GRASS" },
       { x = 114, y = 22, terrain = "TERRAIN_PLAINS" },
@@ -28,9 +28,9 @@ MTB_TSL_HUGE_AUSTRALIA = {
   cities = {
     {
       labelKey = "LOC_MTB_CITY_01",
-      city = { x = 116, y = 14 },
-      harbor = { x = 117, y = 14 },
-      commercialHub = { x = 116, y = 15 },
+      city = { x = 115, y = 13 },
+      harbor = { x = 115, y = 12 },
+      commercialHub = { x = 114, y = 13 },
     },
     {
       labelKey = "LOC_MTB_CITY_02",
