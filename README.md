@@ -2,7 +2,7 @@
 
 把一套规划一次性导入为《文明 6》原生地图钉，并与 **Detailed Map Tacks** 配合显示相邻加成。
 
-当前 `v0.1.1` 是可玩的首个原型，内置风云变幻官方 **真实开局位置极大地球** 的澳大利亚港商规划：
+当前 `v0.1.2` 是开发原型，内置风云变幻官方 **真实开局位置极大地球** 的澳大利亚港商规划：
 
 - 澳洲核心 6 城；
 - 澳大利亚 + 新西兰 8 城；
@@ -34,7 +34,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 Documents\My Games\Sid Meier's Civilization VI\Mods\MapTackBlueprints
 ```
 
-进入游戏的“额外内容 → 模组”启用 **Map Tack Blueprints**。打开一局游戏后，点左下角地图钉列表，列表底部会出现 **“蓝图方案…”**。
+进入游戏的“额外内容 → 模组”启用 **Map Tack Blueprints**。打开一局游戏后，点左下角地图钉列表，**“添加钉”上方**会出现 **“蓝图方案…”**。
 
 ## 使用
 
@@ -50,7 +50,7 @@ Documents\My Games\Sid Meier's Civilization VI\Mods\MapTackBlueprints
 
 - 首版只内置一张固定地图的一套蓝图族；
 - 尚未加入“把当前手工地图钉保存为自定义方案”和配置码导入/导出；
-- 需要在实际游戏里确认未探索迷雾区域是否允许由 UI API 直接创建地图钉；
+- 已在开启 Detailed Map Tacks 的实际游戏中验证 8 城方案可创建 24 个钉，包括未探索区域；尚未覆盖所有 UI 模组组合；
 - 坐标方案是经济蓝图，不会自动响应战争、城邦占位、忠诚度或资源揭示。
 
 ## 路线图

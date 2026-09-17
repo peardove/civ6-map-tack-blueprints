@@ -201,11 +201,11 @@ local function RemoveOwnedPins()
 end
 
 local function ConfirmRemove()
-  local dialog = PopupDialog:new("MTB_RemoveBlueprintPins");
+  local dialog = PopupDialogInGame:new("MTB_RemoveBlueprintPins");
   dialog:AddTitle(Locale.Lookup("LOC_MTB_REMOVE_CONFIRM_TITLE"));
   dialog:AddText(Locale.Lookup("LOC_MTB_REMOVE_CONFIRM_TEXT"));
-  dialog:AddButton(Locale.Lookup("LOC_YES"), RemoveOwnedPins);
-  dialog:AddButton(Locale.Lookup("LOC_NO"), nil);
+  dialog:AddConfirmButton(Locale.Lookup("LOC_YES"), RemoveOwnedPins);
+  dialog:AddCancelButton(Locale.Lookup("LOC_NO"), nil);
   dialog:Open();
 end
 
@@ -227,6 +227,10 @@ end
 
 local function ClosePanel()
   Controls.ModalScrim:SetHide(true);
+  UIManager:DequeuePopup(ContextPtr);
+  if not m_buttonInjected then
+    ContextPtr:SetHide(false);
+  end
 end
 
 local function OpenPanel()
@@ -243,6 +247,24 @@ local function OpenPanel()
   UpdateSelection();
   SetActionStatus(Locale.Lookup("LOC_MTB_READY"), false);
   Controls.ModalScrim:SetHide(false);
+  Controls.WindowStack:CalculateSize();
+  Controls.WindowStack:ReprocessAnchoring();
+  Controls.WindowContainer:ReprocessAnchoring();
+  -- AddUserInterfaces contexts are initially hidden by InGame.lua.
+  -- Showing a child alone does not make its hidden context visible.
+  UIManager:QueuePopup(ContextPtr, PopupPriority.Current);
+end
+
+local function FindDescendant(control, id, depth)
+  if control == nil then return nil; end
+  if control:GetID() == id then return control; end
+  if depth > 0 and control.GetChildren ~= nil then
+    for _, child in ipairs(control:GetChildren()) do
+      local found = FindDescendant(child, id, depth - 1);
+      if found ~= nil then return found; end
+    end
+  end
+  return nil;
 end
 
 local function TryInjectButton()
@@ -250,71 +272,38 @@ local function TryInjectButton()
     return true;
   end
 
-  -- MapPinListPanel's LuaContext has no ID. Its outer container belongs to
-  -- MinimapPanel and is addressable, so place our button over the stock
-  -- panel's deliberately empty 280x25 footer slot.
+  -- The stock list lives in an unnamed LuaContext. Walk its children
+  -- instead of guessing lookup paths or overlaying the Add Pin button.
   local mapPinPanel = ContextPtr:LookUpControl("/InGame/MinimapPanel/MapPinListPanel");
-  if mapPinPanel ~= nil then
-    m_buttonInstance = {};
-    ContextPtr:BuildInstanceForControl("BlueprintOverlayButtonInstance", m_buttonInstance, mapPinPanel);
-    m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eLClick, OpenPanel);
-    m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
-    Controls.FallbackButton:SetHide(true);
-    m_buttonInjected = true;
-    print("MapTackBlueprints: attached to /InGame/MinimapPanel/MapPinListPanel");
-    return true;
-  end
-
-  -- Retain a stack-based path for UI overhaul mods that expose the nested
-  -- context under a named node.
-  local mapPinStack = nil;
-  local stackPaths = {
-    "/InGame/MinimapPanel/MapPinListPanel/MapPinStack",
-    "/InGame/MinimapPanel/MapPinListPanel/MapPinListPanel/MapPinStack",
-    "/InGame/MapPinListPanel/MapPinStack",
-  };
-  for _, path in ipairs(stackPaths) do
-    mapPinStack = ContextPtr:LookUpControl(path);
-    if mapPinStack ~= nil then
-      print("MapTackBlueprints: found MapPinStack at " .. path);
-      break
-    end
-  end
-
-  if mapPinStack == nil then
-    local addButtonPaths = {
-      "/InGame/MinimapPanel/MapPinListPanel/AddPinButton",
-      "/InGame/MinimapPanel/MapPinListPanel/MapPinListPanel/AddPinButton",
-      "/InGame/MapPinListPanel/AddPinButton",
-    };
-    for _, path in ipairs(addButtonPaths) do
-      local addButton = ContextPtr:LookUpControl(path);
-      if addButton ~= nil then
-        mapPinStack = addButton:GetParent();
-        print("MapTackBlueprints: found AddPinButton at " .. path);
-        break
-      end
-    end
-  end
-
-  if mapPinStack == nil then
+  local mapPinStack = FindDescendant(mapPinPanel, "MapPinStack", 5);
+  local addButton = FindDescendant(mapPinStack, "AddPinButton", 1);
+  if mapPinStack == nil or addButton == nil then
     return false;
   end
 
+  local order = {};
+  for index, child in ipairs(mapPinStack:GetChildren()) do
+    order[tostring(child)] = index;
+  end
   m_buttonInstance = {};
   ContextPtr:BuildInstanceForControl("BlueprintButtonInstance", m_buttonInstance, mapPinStack);
+  order[tostring(m_buttonInstance.BlueprintButton)] = order[tostring(addButton)] - 0.5;
+  mapPinStack:SortChildren(function(a, b) return order[tostring(a)] < order[tostring(b)]; end);
   m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eLClick, OpenPanel);
   m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
   mapPinStack:CalculateSize();
   mapPinStack:ReprocessAnchoring();
+  mapPinStack:GetParent():ReprocessAnchoring();
   Controls.FallbackButton:SetHide(true);
   m_buttonInjected = true;
+  print("MapTackBlueprints: inserted above AddPinButton");
   return true;
 end
 
 local function OnLoadGameViewStateDone()
   if not TryInjectButton() then
     Controls.FallbackButton:SetHide(false);
+    ContextPtr:SetHide(false);
     print("MapTackBlueprints: MapPinStack not found; showing fallback button");
   end
 end
