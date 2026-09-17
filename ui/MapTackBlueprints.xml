@@ -44,4 +44,8 @@
   <Instance Name="BlueprintButtonInstance">
     <GridButton ID="BlueprintButton" Anchor="C,T" Size="280,24" String="LOC_MTB_OPEN_BUTTON" ToolTip="LOC_MTB_OPEN_BUTTON_TT" Style="ButtonControl" />
   </Instance>
+
+  <Instance Name="BlueprintOverlayButtonInstance">
+    <GridButton ID="BlueprintButton" Anchor="C,B" Offset="-6,0" Size="280,24" String="LOC_MTB_OPEN_BUTTON" ToolTip="LOC_MTB_OPEN_BUTTON_TT" Style="ButtonControl" />
+  </Instance>
 </Context>

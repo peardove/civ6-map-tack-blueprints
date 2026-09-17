@@ -19,7 +19,6 @@ local ROLE_KEYS = {
 local m_selectedCityCount = 8;
 local m_buttonInstance = nil;
 local m_buttonInjected = false;
-local m_injectFrames = 0;
 
 local function CoordKey(x, y)
   return tostring(x) .. ":" .. tostring(y);
@@ -251,6 +250,23 @@ local function TryInjectButton()
     return true;
   end
 
+  -- MapPinListPanel's LuaContext has no ID. Its outer container belongs to
+  -- MinimapPanel and is addressable, so place our button over the stock
+  -- panel's deliberately empty 280x25 footer slot.
+  local mapPinPanel = ContextPtr:LookUpControl("/InGame/MinimapPanel/MapPinListPanel");
+  if mapPinPanel ~= nil then
+    m_buttonInstance = {};
+    ContextPtr:BuildInstanceForControl("BlueprintOverlayButtonInstance", m_buttonInstance, mapPinPanel);
+    m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eLClick, OpenPanel);
+    m_buttonInstance.BlueprintButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
+    Controls.FallbackButton:SetHide(true);
+    m_buttonInjected = true;
+    print("MapTackBlueprints: attached to /InGame/MinimapPanel/MapPinListPanel");
+    return true;
+  end
+
+  -- Retain a stack-based path for UI overhaul mods that expose the nested
+  -- context under a named node.
   local mapPinStack = nil;
   local stackPaths = {
     "/InGame/MinimapPanel/MapPinListPanel/MapPinStack",
@@ -296,14 +312,10 @@ local function TryInjectButton()
   return true;
 end
 
-local function OnUpdate()
-  m_injectFrames = m_injectFrames + 1;
-  if TryInjectButton() then
-    ContextPtr:ClearUpdate();
-  elseif m_injectFrames > 600 then
+local function OnLoadGameViewStateDone()
+  if not TryInjectButton() then
     Controls.FallbackButton:SetHide(false);
     print("MapTackBlueprints: MapPinStack not found; showing fallback button");
-    ContextPtr:ClearUpdate();
   end
 end
 
@@ -326,9 +338,8 @@ local function Initialize()
   Controls.FallbackButton:RegisterCallback(Mouse.eLClick, OpenPanel);
   Controls.FallbackButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 
-  if not TryInjectButton() then
-    ContextPtr:SetUpdate(OnUpdate);
-  end
+  Events.LoadGameViewStateDone.Add(OnLoadGameViewStateDone);
+  TryInjectButton();
   print("MapTackBlueprints: initialized");
 end
 
