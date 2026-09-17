@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context ColorSet="Beige_Black" FontStyle="Shadow">
+  <GridButton ID="FallbackButton" Anchor="L,B" Offset="300,18" Size="120,30" String="LOC_MTB_FALLBACK_BUTTON" ToolTip="LOC_MTB_OPEN_BUTTON_TT" Style="ButtonControl" Hidden="1" />
+
+  <Box ID="ModalScrim" Color="0,0,0,150" Size="parent,parent" ConsumeMouse="1" Hidden="1">
+    <Grid ID="WindowContainer" Size="auto,auto" Anchor="C,C" Style="DropShadow2" Color="255,255,255,200" AutoSizePadding="25,25" ConsumeMouse="1">
+      <Grid ID="Window" Size="600,auto" Anchor="C,C" Style="WindowFrameTitle" AutoSizePadding="0,18">
+        <Stack ID="WindowStack" StackGrowth="Down" Padding="10" Anchor="C,T">
+          <Container Size="560,42" Anchor="C,T">
+            <Label Style="WindowHeader" Anchor="C,C" String="{LOC_MTB_TITLE:upper}" />
+          </Container>
+
+          <Label ID="BlueprintTitle" Anchor="C,T" Size="540,26" Style="FontFlair18" String="" />
+          <Label ID="BlueprintDescription" Anchor="C,T" WrapWidth="540" Style="FontNormal16" String="" />
+          <Label ID="MapStatus" Anchor="C,T" WrapWidth="540" Style="FontNormal16" String="" />
+
+          <Label Anchor="L,T" Size="540,22" Style="FontFlair16" String="{LOC_MTB_CHOOSE_PLAN:upper}" />
+          <Stack ID="PlanButtons" StackGrowth="Right" Padding="8" Anchor="C,T">
+            <GridButton ID="Plan6Button" Size="174,38" Style="ButtonControl" String="LOC_MTB_PLAN_6" />
+            <GridButton ID="Plan8Button" Size="174,38" Style="ButtonControl" String="LOC_MTB_PLAN_8" />
+            <GridButton ID="Plan10Button" Size="174,38" Style="ButtonControl" String="LOC_MTB_PLAN_10" />
+          </Stack>
+
+          <Grid Texture="Controls_DropdownPanel" InnerPadding="12,10" SliceCorner="10,10" SliceTextureSize="22,22" Size="540,auto" Anchor="C,T">
+            <Stack StackGrowth="Down" Padding="6" Anchor="L,T" Size="516,auto">
+              <Label ID="PlanSummary" Anchor="L,T" WrapWidth="516" Style="FontNormal16" String="" />
+              <Label Anchor="L,T" WrapWidth="516" Style="FontNormal14" String="{LOC_MTB_BUILD_ORDER}" />
+              <Label Anchor="L,T" WrapWidth="516" Style="FontNormal14" String="{LOC_MTB_SAFETY_NOTE}" />
+            </Stack>
+          </Grid>
+
+          <Label ID="ActionStatus" Anchor="C,T" WrapWidth="540" Style="FontNormal16" String="{LOC_MTB_READY}" />
+
+          <Stack StackGrowth="Right" Padding="8" Anchor="C,T">
+            <GridButton ID="ImportButton" Size="174,41" Style="MainButton" String="LOC_MTB_IMPORT_UPDATE" />
+            <GridButton ID="RemoveButton" Size="174,41" Style="ButtonRed" String="LOC_MTB_REMOVE" />
+            <GridButton ID="CloseButton" Size="174,41" Style="ButtonControl" String="LOC_CLOSE" />
+          </Stack>
+        </Stack>
+      </Grid>
+    </Grid>
+  </Box>
+
+  <Instance Name="BlueprintButtonInstance">
+    <GridButton ID="BlueprintButton" Anchor="C,T" Size="280,24" String="LOC_MTB_OPEN_BUTTON" ToolTip="LOC_MTB_OPEN_BUTTON_TT" Style="ButtonControl" />
+  </Instance>
+</Context>

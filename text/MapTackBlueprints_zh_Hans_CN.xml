@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <LocalizedText>
+    <Replace Tag="LOC_MTB_TITLE" Language="zh_Hans_CN"><Text>地图钉蓝图</Text></Replace>
+    <Replace Tag="LOC_MTB_OPEN_BUTTON" Language="zh_Hans_CN"><Text>蓝图方案…</Text></Replace>
+    <Replace Tag="LOC_MTB_FALLBACK_BUTTON" Language="zh_Hans_CN"><Text>地图钉蓝图</Text></Replace>
+    <Replace Tag="LOC_MTB_OPEN_BUTTON_TT" Language="zh_Hans_CN"><Text>导入并管理可复用的地图钉规划。</Text></Replace>
+    <Replace Tag="LOC_MTB_BLUEPRINT_AUSTRALIA_TITLE" Language="zh_Hans_CN"><Text>澳大利亚港商扩张蓝图</Text></Replace>
+    <Replace Tag="LOC_MTB_BLUEPRINT_AUSTRALIA_DESCRIPTION" Language="zh_Hans_CN"><Text>适用于风云变幻官方“真实开局位置极大地球”。每城按市中心 + 港口 + 商业中心三角规划。</Text></Replace>
+    <Replace Tag="LOC_MTB_CHOOSE_PLAN" Language="zh_Hans_CN"><Text>选择方案</Text></Replace>
+    <Replace Tag="LOC_MTB_PLAN_6" Language="zh_Hans_CN"><Text>澳洲核心 · 6城</Text></Replace>
+    <Replace Tag="LOC_MTB_PLAN_8" Language="zh_Hans_CN"><Text>澳新骨架 · 8城</Text></Replace>
+    <Replace Tag="LOC_MTB_PLAN_10" Language="zh_Hans_CN"><Text>北方群岛 · 10城</Text></Replace>
+    <Replace Tag="LOC_MTB_PLAN_SUMMARY" Language="zh_Hans_CN"><Text>{1_Count} 城 · {2_PinCount} 个地图钉 · 全部完成后港口与商业中心原始相邻合计 +{3_Adjacency}/回合。</Text></Replace>
+    <Replace Tag="LOC_MTB_BUILD_ORDER" Language="zh_Hans_CN"><Text>建议顺序：港口 → 灯塔 → 4人口 → 商业中心 → 市场；实际节奏仍按局势调整。</Text></Replace>
+    <Replace Tag="LOC_MTB_SAFETY_NOTE" Language="zh_Hans_CN"><Text>导入/更新只处理名称以 [MTB-AU] 开头的钉。手工钉一律保留；目标格已有手工钉时会报告冲突并跳过。</Text></Replace>
+    <Replace Tag="LOC_MTB_READY" Language="zh_Hans_CN"><Text>已就绪。选择方案后即可导入或更新。</Text></Replace>
+    <Replace Tag="LOC_MTB_IMPORT_UPDATE" Language="zh_Hans_CN"><Text>导入 / 更新方案</Text></Replace>
+    <Replace Tag="LOC_MTB_REMOVE" Language="zh_Hans_CN"><Text>移除本蓝图地图钉</Text></Replace>
+    <Replace Tag="LOC_MTB_MAP_VALID" Language="zh_Hans_CN"><Text>地图匹配：官方真实开局极大地球 ✓</Text></Replace>
+    <Replace Tag="LOC_MTB_MAP_WRONG_SIZE" Language="zh_Hans_CN"><Text>地图尺寸不符：当前 {1_Width}×{2_Height}，预期 {3_Width}×{4_Height}。已禁用导入。</Text></Replace>
+    <Replace Tag="LOC_MTB_MAP_FINGERPRINT_FAILED" Language="zh_Hans_CN"><Text>尺寸相同，但澳大利亚地形指纹不符。已禁用导入。</Text></Replace>
+    <Replace Tag="LOC_MTB_NO_LOCAL_PLAYER" Language="zh_Hans_CN"><Text>当前没有可用的本地玩家配置。</Text></Replace>
+    <Replace Tag="LOC_MTB_IMPORT_RESULT" Language="zh_Hans_CN"><Text>完成：新建 {1_Created}，更新 {2_Updated}，移除旧钉 {3_Deleted}，跳过手工钉冲突 {4_Conflicts}，放置失败 {5_Failed}。</Text></Replace>
+    <Replace Tag="LOC_MTB_REMOVE_RESULT" Language="zh_Hans_CN"><Text>已移除 {1_Count} 个蓝图钉；手工地图钉未改动。</Text></Replace>
+    <Replace Tag="LOC_MTB_REMOVE_CONFIRM_TITLE" Language="zh_Hans_CN"><Text>移除蓝图地图钉？</Text></Replace>
+    <Replace Tag="LOC_MTB_REMOVE_CONFIRM_TEXT" Language="zh_Hans_CN"><Text>这会移除所有名称以 [MTB-AU] 开头的地图钉，其他地图钉保持不变。</Text></Replace>
+    <Replace Tag="LOC_MTB_ROLE_CITY" Language="zh_Hans_CN"><Text>城址</Text></Replace>
+    <Replace Tag="LOC_MTB_ROLE_HARBOR" Language="zh_Hans_CN"><Text>港口</Text></Replace>
+    <Replace Tag="LOC_MTB_ROLE_COMMERCIAL" Language="zh_Hans_CN"><Text>商业</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_01" Language="zh_Hans_CN"><Text>首都</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_02" Language="zh_Hans_CN"><Text>近西</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_03" Language="zh_Hans_CN"><Text>北部产城</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_04" Language="zh_Hans_CN"><Text>东北岸</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_05" Language="zh_Hans_CN"><Text>西北岸</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_06" Language="zh_Hans_CN"><Text>西海岸</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_07" Language="zh_Hans_CN"><Text>新西兰北</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_08" Language="zh_Hans_CN"><Text>新西兰南</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_09" Language="zh_Hans_CN"><Text>帝汶海</Text></Replace>
+    <Replace Tag="LOC_MTB_CITY_10" Language="zh_Hans_CN"><Text>北澳</Text></Replace>
+  </LocalizedText>
+</GameData>

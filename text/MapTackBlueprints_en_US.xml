@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <EnglishText>
+    <Row Tag="LOC_MTB_TITLE"><Text>Map Tack Blueprints</Text></Row>
+    <Row Tag="LOC_MTB_OPEN_BUTTON"><Text>Blueprints...</Text></Row>
+    <Row Tag="LOC_MTB_FALLBACK_BUTTON"><Text>Blueprints</Text></Row>
+    <Row Tag="LOC_MTB_OPEN_BUTTON_TT"><Text>Import and manage reusable map-tack plans.</Text></Row>
+    <Row Tag="LOC_MTB_BLUEPRINT_AUSTRALIA_TITLE"><Text>Australia Harbor-Trade Blueprint</Text></Row>
+    <Row Tag="LOC_MTB_BLUEPRINT_AUSTRALIA_DESCRIPTION"><Text>For the official Gathering Storm Huge True Start Location Earth map. Each city is planned as a City Center + Harbor + Commercial Hub triangle.</Text></Row>
+    <Row Tag="LOC_MTB_CHOOSE_PLAN"><Text>Choose a plan</Text></Row>
+    <Row Tag="LOC_MTB_PLAN_6"><Text>Australia core · 6</Text></Row>
+    <Row Tag="LOC_MTB_PLAN_8"><Text>Australia + NZ · 8</Text></Row>
+    <Row Tag="LOC_MTB_PLAN_10"><Text>Northern islands · 10</Text></Row>
+    <Row Tag="LOC_MTB_PLAN_SUMMARY"><Text>{1_Count} cities · {2_PinCount} tacks · {3_Adjacency} raw Harbor + Commercial Hub adjacency per turn after completion.</Text></Row>
+    <Row Tag="LOC_MTB_BUILD_ORDER"><Text>Suggested order: Harbor → Lighthouse → population 4 → Commercial Hub → Market. Adjust timing to the actual game state.</Text></Row>
+    <Row Tag="LOC_MTB_SAFETY_NOTE"><Text>Import/update only changes tacks prefixed [MTB-AU]. Manual tacks are preserved; a manual tack on a target tile is reported as a conflict and skipped.</Text></Row>
+    <Row Tag="LOC_MTB_READY"><Text>Ready. Choose a plan, then import/update it.</Text></Row>
+    <Row Tag="LOC_MTB_IMPORT_UPDATE"><Text>Import / update</Text></Row>
+    <Row Tag="LOC_MTB_REMOVE"><Text>Remove blueprint tacks</Text></Row>
+    <Row Tag="LOC_MTB_MAP_VALID"><Text>Map match: official Huge TSL Earth ✓</Text></Row>
+    <Row Tag="LOC_MTB_MAP_WRONG_SIZE"><Text>Wrong map size: current {1_Width}×{2_Height}; expected {3_Width}×{4_Height}. Import is disabled.</Text></Row>
+    <Row Tag="LOC_MTB_MAP_FINGERPRINT_FAILED"><Text>The map dimensions match, but the Australia terrain fingerprint does not. Import is disabled.</Text></Row>
+    <Row Tag="LOC_MTB_NO_LOCAL_PLAYER"><Text>No local player configuration is available.</Text></Row>
+    <Row Tag="LOC_MTB_IMPORT_RESULT"><Text>Done: {1_Created} created, {2_Updated} updated, {3_Deleted} obsolete removed, {4_Conflicts} manual-tack conflicts skipped, {5_Failed} placements failed.</Text></Row>
+    <Row Tag="LOC_MTB_REMOVE_RESULT"><Text>Removed {1_Count} blueprint tacks. Manual tacks were not changed.</Text></Row>
+    <Row Tag="LOC_MTB_REMOVE_CONFIRM_TITLE"><Text>Remove blueprint tacks?</Text></Row>
+    <Row Tag="LOC_MTB_REMOVE_CONFIRM_TEXT"><Text>This removes every tack whose name begins with [MTB-AU]. Other map tacks are preserved.</Text></Row>
+    <Row Tag="LOC_MTB_ROLE_CITY"><Text>City</Text></Row>
+    <Row Tag="LOC_MTB_ROLE_HARBOR"><Text>Harbor</Text></Row>
+    <Row Tag="LOC_MTB_ROLE_COMMERCIAL"><Text>Commercial</Text></Row>
+    <Row Tag="LOC_MTB_CITY_01"><Text>Capital</Text></Row>
+    <Row Tag="LOC_MTB_CITY_02"><Text>Near West</Text></Row>
+    <Row Tag="LOC_MTB_CITY_03"><Text>North Production</Text></Row>
+    <Row Tag="LOC_MTB_CITY_04"><Text>Northeast</Text></Row>
+    <Row Tag="LOC_MTB_CITY_05"><Text>Northwest</Text></Row>
+    <Row Tag="LOC_MTB_CITY_06"><Text>West Coast</Text></Row>
+    <Row Tag="LOC_MTB_CITY_07"><Text>North NZ</Text></Row>
+    <Row Tag="LOC_MTB_CITY_08"><Text>South NZ</Text></Row>
+    <Row Tag="LOC_MTB_CITY_09"><Text>Timor Sea</Text></Row>
+    <Row Tag="LOC_MTB_CITY_10"><Text>North Australia</Text></Row>
+  </EnglishText>
+</GameData>
