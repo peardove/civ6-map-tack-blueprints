@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="f5384cc1-8254-4930-9f6b-baf6c99572be" version="4">
+<Mod id="f5384cc1-8254-4930-9f6b-baf6c99572be" version="5">
   <Properties>
     <Name>Map Tack Blueprints</Name>
     <Authors>peardove</Authors>
@@ -7,7 +7,7 @@
     <Description>Imports named city and district planning blueprints as native Civilization VI map tacks. Includes Australia plans for the official Huge True Start Location Earth map and integrates with Detailed Map Tacks when installed.</Description>
     <AffectsSavedGames>0</AffectsSavedGames>
     <CompatibleVersions>1.2,2.0</CompatibleVersions>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
   </Properties>
 
   <InGameActions>

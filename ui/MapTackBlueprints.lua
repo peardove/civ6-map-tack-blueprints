@@ -101,6 +101,18 @@ local function NotifyDmtAdded(pin)
   end
 end
 
+local function IsCompletedTarget(target)
+  local plot = Map.GetPlot(target.x, target.y);
+  if plot == nil then
+    return false;
+  end
+
+  -- A city center or completed district already communicates the plan better
+  -- than a tack.  More importantly, asking the native map-pin API to create a
+  -- tack on an occupied district plot is not safe on every game build.
+  return plot:IsCity() or plot:GetDistrictType() >= 0;
+end
+
 local function ImportSelectedPlan()
   local mapValid, mapMessage = ValidateCurrentMap();
   if not mapValid then
@@ -119,18 +131,30 @@ local function ImportSelectedPlan()
   local existingByCoord = {};
   local ownedPins = {};
   for _, pin in pairs(playerConfig:GetMapPins() or {}) do
-    existingByCoord[CoordKey(pin:GetHexX(), pin:GetHexY())] = pin;
-    if StartsWith(pin:GetName(), BLUEPRINT.ownedNamePrefix) then
-      table.insert(ownedPins, pin);
+    -- MapPinConfig handles are invalidated by later create/delete operations.
+    -- Keep only plain Lua values across mutations and re-fetch by ID right
+    -- before touching a pin.
+    local record = {
+      id = pin:GetID(),
+      x = pin:GetHexX(),
+      y = pin:GetHexY(),
+      name = pin:GetName(),
+    };
+    existingByCoord[CoordKey(record.x, record.y)] = record;
+    if StartsWith(record.name, BLUEPRINT.ownedNamePrefix) then
+      table.insert(ownedPins, record);
     end
   end
 
   local deleted = 0;
-  for _, pin in ipairs(ownedPins) do
-    local key = CoordKey(pin:GetHexX(), pin:GetHexY());
+  for _, record in ipairs(ownedPins) do
+    local key = CoordKey(record.x, record.y);
     if desired[key] == nil then
-      NotifyDmtRemoved(pin);
-      playerConfig:DeleteMapPin(pin:GetID());
+      local pin = playerConfig:GetMapPinID(record.id);
+      if pin ~= nil then
+        NotifyDmtRemoved(pin);
+        playerConfig:DeleteMapPin(record.id);
+      end
       existingByCoord[key] = nil;
       deleted = deleted + 1;
     end
@@ -141,15 +165,21 @@ local function ImportSelectedPlan()
   local conflicts = 0;
   local failed = 0;
   for key, target in pairs(desired) do
-    local pin = existingByCoord[key];
-    if pin ~= nil and not StartsWith(pin:GetName(), BLUEPRINT.ownedNamePrefix) then
+    local record = existingByCoord[key];
+    if IsCompletedTarget(target) then
+      -- The planned city/district has already been built; no tack is needed.
+    elseif record ~= nil and not StartsWith(record.name, BLUEPRINT.ownedNamePrefix) then
       conflicts = conflicts + 1;
     else
-      local isNew = pin == nil;
-      if pin == nil then
+      local isNew = record == nil;
+      local pin = nil;
+      if isNew then
         pin = playerConfig:GetMapPin(target.x, target.y);
       else
-        NotifyDmtRemoved(pin);
+        pin = playerConfig:GetMapPinID(record.id);
+        if pin ~= nil then
+          NotifyDmtRemoved(pin);
+        end
       end
 
       if pin ~= nil then
@@ -184,13 +214,16 @@ local function RemoveOwnedPins()
   local pinsToDelete = {};
   for _, pin in pairs(playerConfig:GetMapPins() or {}) do
     if StartsWith(pin:GetName(), BLUEPRINT.ownedNamePrefix) then
-      table.insert(pinsToDelete, pin);
+      table.insert(pinsToDelete, pin:GetID());
     end
   end
 
-  for _, pin in ipairs(pinsToDelete) do
-    NotifyDmtRemoved(pin);
-    playerConfig:DeleteMapPin(pin:GetID());
+  for _, pinID in ipairs(pinsToDelete) do
+    local pin = playerConfig:GetMapPinID(pinID);
+    if pin ~= nil then
+      NotifyDmtRemoved(pin);
+      playerConfig:DeleteMapPin(pinID);
+    end
   end
 
   Network.BroadcastPlayerInfo();
